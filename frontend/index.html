@@ -2,26 +2,20 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Robot Conteur</title>
+    <title>Robot Conteur QT</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>🤖 Robot Conteur Émotif</h1>
+        <h1>🤖 QT Conteur Émotif</h1>
         
         <div class="robot-container">
-            <div class="robot-face" id="robotFace">
-                <div class="eyes">
-                    <div class="eye left"></div>
-                    <div class="eye right"></div>
-                </div>
-                <div class="mouth" id="mouth"></div>
-            </div>
+            <img src="emotions/neutre.png" alt="Visage du robot QT" id="robotImage" class="robot-face">
         </div>
 
         <div class="controls">
-            <textarea id="promptInput" placeholder="Entrez votre demande d'histoire..."></textarea>
-            <button onclick="generateStory()">Générer l'histoire</button>
+            <textarea id="promptInput" placeholder="Décris ton histoire..."></textarea>
+            <button onclick="generateStory()">Commencer l'histoire</button>
         </div>
 
         <div class="story-display" id="storyDisplay"></div>

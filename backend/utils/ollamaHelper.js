@@ -9,7 +9,7 @@ async function generateStory(prompt) {
       prompt: `
         Crée une histoire en 5 parties séparées par '||'. 
         Chaque partie doit contenir une émotion différente entre []. Les émotions possibles sont :
-        joie, fierté, tristesse, colère, peur, surprise, indifférence, neutre. 
+        joyeux, triste, taquin, En colère, colère, affectueux, Timide, heureux, déçu, chagriné, surpris, surprise, neutre, étonné, fâché, amusé, inquiet. 
         Exemple: "Le lièvre sautait.[joie]||Il tomba.[triste]"
         Thème: ${prompt}
       `,
