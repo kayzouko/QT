@@ -1,71 +1,75 @@
-/* Reset de base */
+/* Reset et polices */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
     min-height: 100vh;
     padding: 2rem;
-    color: #333;
+    color: #2c3e50;
 }
 
 .container {
     max-width: 800px;
     margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
     padding: 2rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
 }
 
 h1 {
     text-align: center;
     margin-bottom: 1.5rem;
-    color: #2c3e50;
     font-size: 2.2rem;
-    position: relative;
-    padding-bottom: 10px;
-}
-
-h1::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 3px;
-    background: linear-gradient(90deg, #3498db, #9b59b6);
+    color: #3498db;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
 }
 
 /* Robot Container */
 .robot-container {
     text-align: center;
     margin: 2rem 0;
-    position: relative;
+    perspective: 1000px;
 }
 
 .robot-face {
     width: 280px;
-    height: 280px;
+    height: 200px;
     object-fit: contain;
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.15));
     border-radius: 50%;
-    background: radial-gradient(circle at center, #f8f9fa 0%, #e9ecef 100%);
-    padding: 20px;
+    background: radial-gradient(circle, #f8f9fa 0%, #e9ecef 100%);
+    padding: 15px;
+    animation: breathe 3s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.robot-face.speaking {
+    animation: pulse 1.5s ease-in-out infinite;
+    transform-style: preserve-3d;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1) rotateY(0deg); }
+    50% { transform: scale(1.03) rotateY(5deg); }
+    100% { transform: scale(1) rotateY(0deg); }
 }
 
 /* Contrôles */
 .controls {
     margin: 2rem 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
 }
 
 textarea {
@@ -73,11 +77,12 @@ textarea {
     height: 120px;
     padding: 15px;
     border: 2px solid #dfe6e9;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 1rem;
     resize: none;
-    transition: border 0.3s;
-    background-color: #f8f9fa;
+    transition: all 0.3s;
+    background: rgba(248, 249, 250, 0.8);
+    margin-bottom: 1rem;
 }
 
 textarea:focus {
@@ -86,20 +91,23 @@ textarea:focus {
     box-shadow: 0 0 0 3px rgba(116, 185, 255, 0.2);
 }
 
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
 button {
-    background: linear-gradient(135deg, #3498db 0%, #9b59b6 100%);
+    background: linear-gradient(135deg, #3498db 0%, #6c5ce7 100%);
     color: white;
     border: none;
     padding: 12px 25px;
     border-radius: 50px;
     cursor: pointer;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
+    transition: all 0.3s;
+    flex: 1;
     box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-    align-self: center;
-    width: 200px;
 }
 
 button:hover {
@@ -111,59 +119,76 @@ button:active {
     transform: translateY(0);
 }
 
-/* Affichage de l'histoire */
-.story-display {
-    background-color: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    min-height: 150px;
-    white-space: pre-line;
-    line-height: 1.6;
-    font-size: 1.05rem;
-    border-left: 4px solid #3498db;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    margin-top: 1rem;
-    position: relative;
-    overflow: hidden;
+#stopButton {
+    background: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
+    display: none;
 }
 
-.story-display::before {
-    content: "";
-    position: absolute;
+#stopButton.visible {
+    display: block;
+}
+
+/* Affichage histoire */
+.story-display {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    min-height: 150px;
+    line-height: 1.7;
+    font-size: 1.1rem;
+    border-left: 5px solid #3498db;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+    position: relative;
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+.story-segment {
+    margin-bottom: 1rem;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal {
+    display: none;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.8) 0%,
-        rgba(255, 255, 255, 0) 15%,
-        rgba(255, 255, 255, 0) 85%,
-        rgba(255, 255, 255, 0.8) 100%
-    );
-    pointer-events: none;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Animation de chargement */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    max-width: 500px;
+    text-align: center;
 }
 
-.story-segment {
-    animation: fadeIn 0.5s ease-out;
-    margin-bottom: 1rem;
+.modal button {
+    margin-top: 1rem;
+    background: #3498db;
+    color: white;
 }
 
-/* Responsive */
+/* responsive */
 @media (max-width: 768px) {
     .container {
         padding: 1.5rem;
     }
     
     .robot-face {
-        width: 220px;
-        height: 220px;
+        width: 200px;
+        height: 200px;
     }
     
     h1 {
@@ -174,6 +199,7 @@ button:active {
 @media (max-width: 480px) {
     .container {
         padding: 1rem;
+        border-radius: 15px;
     }
     
     .robot-face {
@@ -182,17 +208,7 @@ button:active {
     }
     
     button {
-        width: 100%;
+        padding: 10px 15px;
+        font-size: 0.9rem;
     }
-}
-
-.robot-face.fache {
-    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
-}
-
-@keyframes shake {
-    10%, 90% { transform: translateX(-1px); }
-    20%, 80% { transform: translateX(2px); }
-    30%, 50%, 70% { transform: translateX(-3px); }
-    40%, 60% { transform: translateX(3px); }
 }

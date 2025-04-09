@@ -2,9 +2,36 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Robot Conteur QT</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
+<div id="audioModal" class="modal">
+    <div class="modal-content">
+        <h3>Activation de la voix</h3>
+        <p>Pour que QT puisse parler, cliquez sur ce bouton :</p>
+        <button id="activateAudio">Activer la voix</button>
+    </div>
+</div>
+
+<script>
+//script d'activation
+document.getElementById('activateAudio').addEventListener('click', () => {
+    const utterance = new SpeechSynthesisUtterance('');
+    window.speechSynthesis.speak(utterance);
+    window.speechSynthesis.cancel();
+    
+    document.getElementById('audioModal').style.display = 'none';
+    localStorage.setItem('audioActivated', 'true');
+});
+
+//affiche le modal si pas encore activé
+if (!localStorage.getItem('audioActivated')) {
+    document.getElementById('audioModal').style.display = 'flex';
+}
+</script>
+
 <body>
     <div class="container">
         <h1>🤖 QT Conteur Émotif</h1>
@@ -14,8 +41,11 @@
         </div>
 
         <div class="controls">
-            <textarea id="promptInput" placeholder="Décris ton histoire..."></textarea>
-            <button onclick="generateStory()">Commencer l'histoire</button>
+            <textarea id="promptInput" placeholder="Décris ton histoire (ex: un lièvre qui voyage dans l'espace)..."></textarea>
+            <div class="button-container">
+                <button id="generateButton">Commencer l'histoire</button>
+                <button id="stopButton" class="hidden">Arrêter</button>
+            </div>
         </div>
 
         <div class="story-display" id="storyDisplay"></div>
