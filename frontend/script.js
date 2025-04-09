@@ -138,4 +138,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    document.getElementById('exportPdfButton').addEventListener('click', () => {
+        // On récupère l'objet jsPDF depuis le module chargé
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+    
+        // Récupération du contenu de l'histoire
+        const storyContent = document.getElementById('storyDisplay').innerText;
+    
+        // Optionnel : séparation du texte en lignes adaptées à la largeur de la page
+        const lines = doc.splitTextToSize(storyContent, 180); // 180 correspond à la largeur maximale du texte en mm
+    
+        // Ajout du texte dans le PDF à partir de la position (10, 10)
+        doc.text(lines, 10, 10);
+    
+        // Sauvegarde du PDF avec le nom "histoire_QT.pdf"
+        doc.save('histoire_QT.pdf');
+    });
 });

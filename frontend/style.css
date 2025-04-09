@@ -1,4 +1,3 @@
-/* Reset et polices */
 * {
     margin: 0;
     padding: 0;
@@ -31,7 +30,19 @@ h1 {
     text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
 }
 
-/* Robot Container */
+.fixed-header {
+    position: sticky; /* ou fixed pour qu'il reste toujours visible */
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.content {
+    margin-top: 150px;
+}
+
 .robot-container {
     text-align: center;
     margin: 2rem 0;
@@ -67,7 +78,6 @@ h1 {
     100% { transform: scale(1) rotateY(0deg); }
 }
 
-/* Contrôles */
 .controls {
     margin: 2rem 0;
 }
@@ -128,7 +138,7 @@ button:active {
     display: block;
 }
 
-/* Affichage histoire */
+/* affichage histoire */
 .story-display {
     background: white;
     padding: 1.5rem;
