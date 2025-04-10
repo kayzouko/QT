@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'taquin': 'taquin.png',
         'colère': 'en-colere.png',
         'en colère': 'en-colere.png',
+        'rage': 'en-colere.png',
         'affectueux': 'affectueux.png',
         'timide': 'timide.png',
         'heureux': 'heureux.png',
@@ -66,25 +67,26 @@ document.addEventListener('DOMContentLoaded', () => {
             generateButton.textContent = 'Génération...';
             stopButton.classList.add('visible');
 
-            // Attendre que les voix soient chargées
+            //attendre que les voix soient chargées
             await loadVoices();
             const frenchVoice = window.speechSynthesis.getVoices().find(v => v.lang.includes('fr'));
 
             for (const segment of data.data.segments) {
                 if (!isSpeaking) break;
 
+                //crée un élément pour afficher le texte de l'histoire
                 const segmentDiv = document.createElement('div');
                 segmentDiv.className = 'story-segment';
-                segmentDiv.textContent = segment.text;
+                segmentDiv.textContent = segment.text; //pour afficher uniquement le texte, sans l'émotion
                 storyDisplay.appendChild(segmentDiv);
                 storyDisplay.scrollTop = storyDisplay.scrollHeight;
 
+                //change l'image du robot en fonction de l'émotion
                 const emotion = segment.emotion.toLowerCase();
                 robotImage.src = `emotions/${emotionsMap[emotion] || 'neutre.png'}`;
-                robotImage.classList.add('speaking');
 
+                //va lire le texte à voix haute
                 await speakText(segment.text, frenchVoice);
-                robotImage.classList.remove('speaking');
 
                 if (!isSpeaking) break;
                 await new Promise(resolve => setTimeout(resolve, 800));

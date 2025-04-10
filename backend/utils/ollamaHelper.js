@@ -11,7 +11,7 @@ async function generateStory(prompt) {
         Chaque partie doit contenir une émotion différente entre []. Les émotions possibles sont :
         joyeux, triste, taquin, En colère, colère, affectueux, Timide, heureux, déçu, chagriné, surpris, surprise, neutre, étonné, fâché, amusé, inquiet. 
         Exemple: "Le lièvre sautait.[joie]||Il tomba.[triste]".
-        Ne dis pas "Voici l'histoire en 5 parties" juste donne l'histoire.
+        Ne dis pas "Voici l'histoire en 10 parties" juste donne l'histoire.
         Thème: ${prompt}
       `,
       stream: false,
@@ -29,11 +29,19 @@ async function generateStory(prompt) {
 
 function parseOllamaResponse(rawText) {
   const segments = rawText.split('||').map(segment => {
-    const [text, emotion] = segment.split('[');
-    return {
-      text: text.trim(),
-      emotion: emotion ? emotion.replace(']', '').trim() : 'neutre'
-    };
+      const match = segment.match(/^(.*)\[([^\]]+)\]$/); //capture le texte et l'émotion entre crochets
+      if (match) {
+          return {
+              text: match[1].trim(),
+              emotion: match[2].trim().toLowerCase() //convertit l'émotion en minuscule
+          };
+      } else {
+          //si aucune émotion n'est trouvée, retourne le texte avec une émotion par défaut
+          return {
+              text: segment.trim(),
+              emotion: 'neutre'
+          };
+      }
   });
 
   return { segments };
