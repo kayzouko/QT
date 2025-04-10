@@ -21,23 +21,28 @@ Ce projet permet à un robot virtuel (inspiré de QT) de raconter des histoires 
 - **Windows** :  
   Téléchargez depuis [nodejs.org](https://nodejs.org/) → LTS Version → Installez comme une app normale
 
-- **macOS/Linux** :  
+- **Linux** :  
   Ouvrez le Terminal et collez :
   ```bash
   curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
   sudo apt install -y nodejs
   ```
 
-### 2. Installer Ollama (IA Locale)
-
-- **Windows** :  
-  Téléchargez OllamaSetup.exe depuis https://ollama.com/download/windows → Exécutez le fichier
-
 - **macOS** :  
   Ouvrez le Terminal et collez :
   ```bash
-  curl -fsSL https://ollama.com/install.sh | sh
+  brew install node
   ```
+  Si tu n’as pas Homebrew installé, tu peux l’installer avec :
+  ```bash
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  ```
+
+### 2. Installer Ollama (IA Locale)
+
+- **Windows/macOS/Linux** :  
+  Téléchargez OllamaSetup depuis https://ollama.com/download → Exécutez le fichier
+
 
 ### 3. Télécharger le Projet
 
@@ -122,4 +127,5 @@ Ce projet permet à un robot virtuel (inspiré de QT) de raconter des histoires 
 ---
 
 Bon amusement avec votre robot conteur !  
-Pour toute question : nizar.boulac@etu.umontpellier.fr
+Pour toute question : nizar.boulac@etu.umontpellier.fr, rayane.sabi@etu.umontpellier.fr
+
