@@ -77,7 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 //crée un élément pour afficher le texte de l'histoire
                 const segmentDiv = document.createElement('div');
                 segmentDiv.className = 'story-segment';
-                segmentDiv.textContent = segment.text; //pour afficher uniquement le texte, sans l'émotion
+                const cleanedText = segment.text.replace(/\s*\[.*?\]\s*/g, '');
+                segmentDiv.textContent = cleanedText; //pour afficher uniquement le texte, sans l'émotion
                 storyDisplay.appendChild(segmentDiv);
                 storyDisplay.scrollTop = storyDisplay.scrollHeight;
 

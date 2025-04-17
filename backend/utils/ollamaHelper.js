@@ -7,7 +7,7 @@ async function generateStory(prompt) {
     const response = await axios.post(`${OLLAMA_HOST}/api/generate`, {
       model: "llama3", //llama3 plus lourd
       prompt: `
-        Crée une histoire en 5 parties séparées par '||'. 
+        Crée une histoire en 10 parties séparées par '||'. 
         Chaque partie doit contenir une émotion différente entre []. Les émotions possibles sont :
         joyeux, triste, taquin, En colère, colère, affectueux, Timide, heureux, déçu, chagriné, surpris, surprise, neutre, étonné, fâché, amusé, inquiet. 
         Exemple: "Le lièvre sautait.[joie]||Il tomba.[triste]".
