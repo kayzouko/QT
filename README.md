@@ -127,5 +127,5 @@ Ce projet permet à un robot virtuel (inspiré de QT) de raconter des histoires 
 ---
 
 Bon amusement avec votre robot conteur !  
-Pour toute question : nizar.boulac@etu.umontpellier.fr, rayane.sabi@etu.umontpellier.fr
+Pour toute question : nizar.boulac@etu.umontpellier.fr, rayane.sabi@etu.umontpellier.fr, marvin.marie-louise@etu.umontpellier.fr
 
