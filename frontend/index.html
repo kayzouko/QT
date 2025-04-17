@@ -36,26 +36,29 @@ if (!localStorage.getItem('audioActivated')) {
 <body>
     <div class="fixed-header">
         <h1>🤖 Conteur Émotif</h1>
-        
-        <div class="robot-container">
-            <img src="emotions/neutre.png" alt="Visage du robot QT" id="robotImage" class="robot-face">
-        </div>
     </div>
-    <div class="content">
-        <div class="controls">
-            <textarea id="promptInput" placeholder="Décris ton histoire (ex: un lièvre qui voyage dans l'espace)..."></textarea>
-            <div class="button-container">
-                <button id="generateButton">Commencer l'histoire</button>
-                <button id="stopButton" class="hidden">Arrêter</button>
+    <div class="main-flex">
+        <div class="robot-container">
+            <div class="robot-qt">
+                <img src="emotions/body.png" alt="Corps du robot" class="robot-body">
+                <img src="emotions/neutre.png" alt="Visage du robot QT" id="robotFace" class="robot-face">
             </div>
         </div>
-
-        <div class="story-display" id="storyDisplay"></div>
-        <div class="export-container" style="text-align: center; margin-top: 1rem;">
-            <button id="exportPdfButton">Exporter l’histoire en PDF</button>
+        <div class="content">
+            <div class="controls">
+                <textarea id="promptInput" placeholder="Décris ton histoire (ex: un lièvre qui voyage dans l'espace)..."></textarea>
+                <div class="button-container">
+                    <button id="generateButton">Commencer l'histoire</button>
+                    <button id="stopButton" class="hidden">Arrêter</button>
+                </div>
+            </div>
+            <div class="story-display" id="storyDisplay"></div>
+            <div class="export-container" style="text-align: center; margin-top: 1rem;">
+                <button id="exportPdfButton">Exporter l’histoire en PDF</button>
+            </div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
+
 </html>

@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'inquiet': 'inquiet.png'
     };
 
-    const robotImage = document.getElementById('robotImage');
+    const robotFace = document.getElementById('robotFace');
     const promptInput = document.getElementById('promptInput');
     const storyDisplay = document.getElementById('storyDisplay');
     const generateButton = document.getElementById('generateButton');
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             storyDisplay.innerHTML = '<div class="loading">QT réfléchit...</div>';
-            robotImage.src = 'emotions/neutre.png';
+            robotFace.src = 'emotions/neutre.png';
 
             const response = await fetch('http://localhost:3000/api/generate', {
                 method: 'POST',
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 //change l'image du robot en fonction de l'émotion
                 const emotion = segment.emotion.toLowerCase();
-                robotImage.src = `emotions/${emotionsMap[emotion] || 'neutre.png'}`;
+                robotFace.src = `emotions/${emotionsMap[emotion] || 'neutre.png'}`;
 
                 //va lire le texte à voix haute
                 await speakText(segment.text, frenchVoice);
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Erreur:', error);
             storyDisplay.innerHTML = `<div class="error">Erreur: ${error.message}</div>`;
-            robotImage.src = 'emotions/triste.png';
+            robotFace.src = 'emotions/triste.png';
         } finally {
             resetUI();
         }
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function resetUI() {
         generateButton.textContent = 'Commencer l\'histoire';
         stopButton.classList.remove('visible');
-        robotImage.classList.remove('speaking');
+        robotFace.classList.remove('speaking');
     }
 
     function loadVoices() {

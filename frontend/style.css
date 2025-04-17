@@ -31,7 +31,7 @@ h1 {
 }
 
 .fixed-header {
-    position: sticky; /* ou fixed pour qu'il reste toujours visible */
+    position: sticky;
     top: 0;
     z-index: 100;
     background: rgba(255, 255, 255, 0.95);
@@ -40,7 +40,7 @@ h1 {
 }
 
 .content {
-    margin-top: 150px;
+    margin-top: 40px;
 }
 
 .robot-container {
@@ -107,8 +107,8 @@ textarea:focus {
 }
 
 button {
-    background: linear-gradient(135deg, #3498db 0%, #6c5ce7 100%);
-    color: white;
+    background: linear-gradient(135deg, #9edcff 0%, #49b5ee 100%);
+    color: #245d7b;
     border: none;
     padding: 12px 25px;
     border-radius: 50px;
@@ -221,4 +221,84 @@ button:active {
         padding: 10px 15px;
         font-size: 0.9rem;
     }
+}
+
+.robot-qt {
+    position: relative;
+    display: inline-block;
+    width: 350px;   /* ajuste selon taille de body.png */
+    height: 420px;  /* ajuste selon taille visuelle désirée */
+}
+
+.robot-body {
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 2;
+    user-select: none;
+    pointer-events: none;
+}
+
+.robot-face {
+    position: absolute;
+    left: 30.5%;
+    top: 57px;     
+    width: 133px;   
+    height: 109px;  
+    transform: translateX(-50%);
+    z-index: 1;
+    border-radius: 50%;
+}
+
+.robot-body {
+    position: relative;
+    z-index: 2; 
+}
+.robot-face {
+    z-index: 1; 
+}
+
+.main-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 25px;
+    gap: 60px; /* espace entre robot et contenu */
+}
+
+.robot-container {
+    min-width: 350px; 
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;  /* espace entre le header et le robot ! */
+}
+
+.content {
+    flex: 1 1 600px;
+    max-width: 800px;
+}
+
+@media (max-width: 900px) {
+    .main-flex {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+    }
+    .robot-container {
+        margin-bottom: 25px;
+        min-width: unset;
+    }
+    .content {
+        max-width: 100%;
+    }
+}
+
+body {
+    background-image: url('emotions/background.png');
+    background-size: 100vw auto;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-attachment: fixed;
+    min-height: 100vh;
 }
